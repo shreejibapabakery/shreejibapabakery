@@ -1,1553 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Shreeji Bapa Bakery</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --cream: #FDF6ED;
-    --warm-white: #FFFBF5;
-    --brown-deep: #2C1A0E;
-    --brown-mid: #5C3317;
-    --brown-light: #8B5E3C;
-    --gold: #C8965C;
-    --gold-light: #E8C99A;
-    --gold-pale: #F5E6CC;
-    --rust: #A0401A;
-    --sage: #7A8C6E;
-    --text-dark: #1E1208;
-    --text-mid: #5A3E28;
-    --text-light: #8B7355;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--text-dark);
-    overflow-x: hidden;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shreeji Bapa Bakery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #fff8e1;
+        }
+        header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+        }
+         nav a {
+                  font-size: 60px;
+        }
 
-  /* ── NOISE TEXTURE ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-  }
+	
+	h2 {
+            color: #d32f2f;
+	    font-size: 40px;
+        }
+	h3 {
+            color: #d32f2f;
+	    font-size: 32px;
+        }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.2rem 4rem;
-    background: rgba(253, 246, 237, 0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(200, 150, 92, 0.2);
-  }
-  .nav-brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--brown-deep);
-    letter-spacing: 0.03em;
-    text-decoration: none;
-  }
-  .nav-brand span { color: var(--gold); }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-mid);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 4rem 6rem 6rem;
-    position: relative;
-    z-index: 2;
-  }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 2rem;
-  }
-  .hero-badge::before {
-    content: '';
-    width: 30px; height: 1px;
-    background: var(--gold);
-    display: inline-block;
-  }
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 5vw, 5.5rem);
-    font-weight: 900;
-    line-height: 1.05;
-    color: var(--brown-deep);
-    margin-bottom: 0.3rem;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold);
-  }
-  .hero-by {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-style: italic;
-    color: var(--text-light);
-    margin-bottom: 1.8rem;
-  }
-  .hero-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem;
-    color: var(--text-mid);
-    line-height: 1.6;
-    max-width: 420px;
-    margin-bottom: 2.5rem;
-    font-style: italic;
-  }
-  .hero-jay {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--brown-light);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 3rem;
-  }
-  .hero-cta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .btn-primary {
-    display: inline-block;
-    padding: 1rem 2.2rem;
-    background: var(--brown-deep);
-    color: var(--gold-light);
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  .btn-primary:hover { background: var(--brown-mid); }
-  .btn-outline {
-    display: inline-block;
-    padding: 1rem 2.2rem;
-    background: transparent;
-    color: var(--brown-deep);
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1.5px solid var(--brown-deep);
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  .btn-outline:hover { background: var(--brown-deep); color: var(--gold-light); }
-
-  .hero-right {
-    position: relative;
-    background: var(--brown-deep);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero-pattern {
-    position: absolute;
-    inset: 0;
-    opacity: 0.06;
-    background-image: repeating-linear-gradient(
-      45deg,
-      var(--gold) 0, var(--gold) 1px,
-      transparent 0, transparent 50%
-    );
-    background-size: 20px 20px;
-  }
-  .hero-circle-outer {
-    width: 480px; height: 480px;
-    border-radius: 50%;
-    border: 1px solid rgba(200, 150, 92, 0.3);
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-    z-index: 2;
-    animation: slowspin 40s linear infinite;
-  }
-  .hero-circle-inner {
-    width: 360px; height: 360px;
-    border-radius: 50%;
-    background: rgba(200, 150, 92, 0.08);
-    border: 1px solid rgba(200, 150, 92, 0.4);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    animation: slowspin 40s linear infinite reverse;
-  }
-  @keyframes slowspin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  .hero-ice-icon {
-    font-size: 5rem;
-    margin-bottom: 1rem;
-    filter: drop-shadow(0 4px 16px rgba(200, 150, 92, 0.5));
-  }
-  .hero-since {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
-  }
-  .hero-year {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: var(--gold-light);
-  }
-
-  /* ── NOTICE BANNER ── */
-  .notice-banner {
-    background: var(--brown-deep);
-    color: var(--gold-light);
-    text-align: center;
-    padding: 1rem 2rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-style: italic;
-    letter-spacing: 0.05em;
-  }
-  .notice-banner strong {
-    font-style: normal;
-    font-weight: 600;
-    color: var(--gold);
-  }
-
-  /* ── SECTION COMMON ── */
-  section { position: relative; z-index: 1; }
-  .section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-  .section-eyebrow {
-    display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 700;
-    color: var(--brown-deep);
-    line-height: 1.2;
-  }
-  .section-title em { font-style: italic; color: var(--gold); }
-  .section-divider {
-    width: 60px; height: 2px;
-    background: var(--gold);
-    margin: 1.5rem auto 0;
-  }
-
-  /* ── ABOUT / VALUES ── */
-  .values-section {
-    padding: 7rem 6rem;
-    background: var(--warm-white);
-  }
-  .values-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border: 1px solid rgba(200, 150, 92, 0.25);
-  }
-  .value-card {
-    padding: 3rem 2.5rem;
-    border-right: 1px solid rgba(200, 150, 92, 0.25);
-    text-align: center;
-    transition: background 0.3s;
-  }
-  .value-card:last-child { border-right: none; }
-  .value-card:hover { background: var(--gold-pale); }
-  .value-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    display: block;
-  }
-  .value-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--brown-deep);
-    margin-bottom: 0.8rem;
-  }
-  .value-desc {
-    font-size: 0.9rem;
-    color: var(--text-mid);
-    line-height: 1.7;
-  }
-
-  /* ── BAKERY PRODUCTS ── */
-  .bakery-section {
-    padding: 7rem 6rem;
-    background: var(--cream);
-  }
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 4rem;
-  }
-  .product-category {
-    background: var(--warm-white);
-    border: 1px solid rgba(200, 150, 92, 0.2);
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .product-category::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s;
-  }
-  .product-category:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(92, 51, 23, 0.12); }
-  .product-category:hover::before { transform: scaleX(1); }
-  .product-cat-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
-  .product-cat-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--brown-deep);
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 1px solid rgba(200, 150, 92, 0.3);
-  }
-  .product-cat-items {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-  }
-  .product-cat-items li {
-    font-size: 0.9rem;
-    color: var(--text-mid);
-    padding-left: 1rem;
-    position: relative;
-  }
-  .product-cat-items li::before {
-    content: '–';
-    position: absolute;
-    left: 0;
-    color: var(--gold);
-  }
-
-  /* ── ICE CREAM MENU ── */
-  .icecream-section {
-    padding: 7rem 0;
-    background: #C4956A;
-    position: relative;
-    overflow: hidden;
-  }
-  .icecream-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0.04;
-    background-image: repeating-linear-gradient(
-      45deg,
-      var(--gold) 0, var(--gold) 1px,
-      transparent 0, transparent 50%
-    );
-    background-size: 20px 20px;
-  }
-  .icecream-inner { padding: 0 6rem; position: relative; z-index: 2; }
-  .icecream-section .section-title { color: var(--brown-deep); }
-  .icecream-section .section-eyebrow { color: var(--brown-mid); }
-
-  .menu-note {
-    text-align: center;
-    margin-top: 1rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-style: italic;
-    color: rgba(44, 26, 14, 0.65);
-  }
-
-  .menu-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin: 3.5rem 0 3rem;
-  }
-  .menu-tab {
-    padding: 0.6rem 1.5rem;
-    background: transparent;
-    border: 1px solid rgba(44, 26, 14, 0.35);
-    color: rgba(44, 26, 14, 0.75);
-    font-size: 1.2rem;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .menu-tab:hover, .menu-tab.active {
-    background: var(--brown-deep);
-    border-color: var(--brown-deep);
-    color: var(--gold-light);
-  }
-
-  .menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1px;
-    background: rgba(200, 150, 92, 0.15);
-  }
-  .menu-item {
-    background: rgba(255, 248, 238, 0.45);
-    padding: 1.5rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    transition: background 0.2s;
-  }
-  .menu-item:hover { background: rgba(255, 248, 238, 0.65); }
-  .menu-item-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.65rem;
-    font-weight: 400;
-    color: var(--brown-deep);
-    flex: 1;
-  }
-  .menu-item-prices {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.2rem;
-    flex-shrink: 0;
-  }
-  .price-row {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-  .price-size {
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(44, 26, 14, 0.55);
-  }
-  .price-val {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--brown-mid);
-  }
-
-  /* hidden menu sections */
-  .menu-section { display: none; }
-  .menu-section.active { display: grid; }
-  .menu-section { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: rgba(200, 150, 92, 0.15); }
-
-  /* ── ICE CREAM BADGE ── */
-  .natural-badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    margin: 4rem auto 0;
-    max-width: 700px;
-    padding: 2rem 3rem;
-    border: 1px solid rgba(44, 26, 14, 0.2);
-    background: rgba(255, 248, 238, 0.4);
-  }
-  .badge-item {
-    text-align: center;
-  }
-  .badge-item-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(44, 26, 14, 0.55);
-    margin-bottom: 0.3rem;
-  }
-  .badge-item-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    color: var(--brown-deep);
-    font-weight: 600;
-  }
-  .badge-sep {
-    width: 1px; height: 40px;
-    background: rgba(44, 26, 14, 0.2);
-  }
-
-  /* ── GALLERY SECTION ── */
-  .gallery-section {
-    padding: 7rem 6rem;
-    background: var(--cream);
-  }
-
-  .gallery-video-wrap {
-    margin-bottom: 3.5rem;
-    display: flex;
-    justify-content: center;
-  }
-  .gallery-video-wrap video {
-    width: 100%;
-    max-width: 720px;
-    border: 2px solid rgba(200, 150, 92, 0.35);
-    display: block;
-  }
-
-  /* Filter tabs */
-  .gallery-filters {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-  }
-  .gallery-filter-btn {
-    padding: 0.55rem 1.4rem;
-    background: transparent;
-    border: 1px solid rgba(92, 51, 23, 0.3);
-    color: var(--text-mid);
-    font-size: 0.78rem;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .gallery-filter-btn:hover,
-  .gallery-filter-btn.active {
-    background: var(--brown-deep);
-    border-color: var(--brown-deep);
-    color: var(--gold-light);
-  }
-
-  /* Masonry grid */
-  .gallery-grid {
-    columns: 4;
-    column-gap: 1rem;
-  }
-  .gallery-item {
-    break-inside: avoid;
-    margin-bottom: 1rem;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    border: 1px solid rgba(200, 150, 92, 0.15);
-  }
-  .gallery-item img {
-    width: 100%;
-    display: block;
-    transition: transform 0.45s ease;
-  }
-  .gallery-item:hover img {
-    transform: scale(1.06);
-  }
-  .gallery-item-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(44, 26, 14, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.35s;
-  }
-  .gallery-item:hover .gallery-item-overlay {
-    background: rgba(44, 26, 14, 0.38);
-  }
-  .gallery-item-overlay span {
-    color: var(--gold-light);
-    font-size: 1.6rem;
-    opacity: 0;
-    transform: scale(0.7);
-    transition: all 0.3s;
-  }
-  .gallery-item:hover .gallery-item-overlay span {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  /* Lightbox */
-  .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    background: rgba(20, 10, 4, 0.93);
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-  }
-  .lightbox.open { display: flex; }
-  .lightbox-img {
-    max-width: 90vw;
-    max-height: 88vh;
-    object-fit: contain;
-    border: 1px solid rgba(200, 150, 92, 0.3);
-  }
-  .lightbox-close {
-    position: absolute;
-    top: 1.5rem; right: 2rem;
-    font-size: 2rem;
-    color: var(--gold-light);
-    cursor: pointer;
-    background: none;
-    border: none;
-    line-height: 1;
-    transition: color 0.2s;
-  }
-  .lightbox-close:hover { color: var(--gold); }
-  .lightbox-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2rem;
-    color: var(--gold-light);
-    cursor: pointer;
-    background: rgba(44, 26, 14, 0.5);
-    border: 1px solid rgba(200, 150, 92, 0.3);
-    width: 3rem; height: 3rem;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-  }
-  .lightbox-arrow:hover { background: var(--gold); color: var(--brown-deep); }
-  .lightbox-prev { left: 1.5rem; }
-  .lightbox-next { right: 1.5rem; }
-
-  /* ── ABOUT SECTION ── */
-  .about-section {
-    padding: 7rem 6rem;
-    background: var(--warm-white);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
-  }
-  .about-text .section-header { text-align: left; }
-  .about-text .section-divider { margin: 1.5rem 0 0; }
-  .about-body {
-    margin-top: 2rem;
-    font-size: 1rem;
-    color: var(--text-mid);
-    line-height: 1.8;
-  }
-  .about-body p + p { margin-top: 1.2rem; }
-  .about-callout {
-    background: var(--brown-deep);
-    padding: 3rem;
-    position: relative;
-  }
-  .about-callout::before {
-    content: '"';
-    font-family: 'Playfair Display', serif;
-    font-size: 10rem;
-    color: var(--gold);
-    opacity: 0.15;
-    position: absolute;
-    top: -2rem; left: 1.5rem;
-    line-height: 1;
-  }
-  .about-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-style: italic;
-    color: var(--gold-light);
-    line-height: 1.5;
-    position: relative;
-    z-index: 1;
-  }
-  .about-owner {
-    margin-top: 2rem;
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    position: relative;
-    z-index: 1;
-  }
-
-  /* ── CONTACT ── */
-  .contact-section {
-    padding: 7rem 6rem;
-    background: var(--cream);
-    text-align: center;
-  }
-  .contact-details {
-    margin-top: 3rem;
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    flex-wrap: wrap;
-  }
-  .contact-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .contact-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-light);
-  }
-  .contact-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--brown-deep);
-  }
-  .contact-value a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .contact-value a:hover { color: var(--gold); }
-
-  .contact-order-note {
-    margin-top: 3rem;
-    display: inline-block;
-    padding: 1.5rem 3rem;
-    background: var(--brown-deep);
-    color: var(--gold-light);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-style: italic;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--brown-deep);
-    padding: 3rem 6rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .footer-brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--gold-light);
-  }
-  .footer-brand span { color: var(--gold); }
-  .footer-copy {
-    font-size: 0.8rem;
-    color: rgba(232, 201, 154, 0.5);
-  }
-  .footer-jay {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
-    font-style: italic;
-    color: var(--gold);
-    letter-spacing: 0.1em;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .hero-left > * {
-    animation: fadeUp 0.8s ease both;
-  }
-  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
-  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
-  .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
-  .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
-  .hero-left > *:nth-child(5) { animation-delay: 0.5s; }
-  .hero-left > *:nth-child(6) { animation-delay: 0.6s; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 1100px) {
-    .gallery-grid { columns: 3; }
-  }
-  @media (max-width: 900px) {
-    nav { padding: 1rem 2rem; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-left { padding: 8rem 2rem 4rem; }
-    .hero-right { min-height: 320px; }
-    .hero-circle-outer { width: 280px; height: 280px; }
-    .hero-circle-inner { width: 210px; height: 210px; }
-    .values-section, .bakery-section, .contact-section { padding: 5rem 2rem; }
-    .values-grid { grid-template-columns: 1fr; }
-    .value-card { border-right: none; border-bottom: 1px solid rgba(200, 150, 92, 0.25); }
-    .icecream-inner { padding: 0 2rem; }
-    .about-section { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
-    footer { padding: 2rem; flex-direction: column; text-align: center; }
-    .natural-badge { gap: 1.5rem; flex-wrap: wrap; padding: 1.5rem; }
-    .gallery-section { padding: 5rem 1.5rem; }
-    .gallery-grid { columns: 2; }
-  }
-  @media (max-width: 500px) {
-    .gallery-grid { columns: 1; }
-  }
-</style>
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+	    font-size: 24px;
+        }
+        li {
+            margin: 5px 0;
+	    font-size: 24px;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d32f2f;
+            color: white;
+        }
+    </style>
 </head>
 <body>
+    <header>
+		<img src="logo.jpg" alt="Shreeji Bapa Bakery Logo" style="height: 300px; margin-bottom: 10px;">
+        <h1>Shreeji Bapa Bakery &reg; by Kinjal Shah</h1>
+        <p>Pure, Fresh and Egg free Bakery products</p>
+	<p>All bakery products  preparation are following guidelines of THE GOD SWAMINARAYAN.</p>
+	<p><strong>Place your order before ONE or TWO days</p>
+	<nav>
+        	<a href="index.html" style="color:white; margin-right: 15px;">Home</a>
+        	<a href="icecream.html" style="color:white; margin-right: 15px;">Ice Cream</a>
+		<a href="gallery.html" style="color:white;">Gallery</a>
+   	</nav>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-brand">Shreeji<span>Bapa</span> Bakery</a>
-  <ul class="nav-links">
-    <li><a href="#products">Products</a></li>
-    <li><a href="#icecream">Ice Cream</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+    </header>
+    
+    <div class="container">
+        <h2>Our Products</h2>
+        <h3>Cakes</h3>
+        <ul>
+            <li>Chocolate cake</li>
+            <li>Mixfruit cake</li>
+            <li>White forest cake</li>
+            <li>Doll cake</li>
+            <li>Swiss cake</li>
+            <li>Pineapple cake</li>
+            <li>Rasmalai cake</li>
+            <li>Oreo cake</li>
+            <li>Dark chocolate cake</li>
+            <li>Strawberry cake</li>
+            <li>Gulabjamun cake</li>
+            <li>Kit kat cake</li>
+            <li>Truffle cake</li>
+            <li>Casata cake</li>
+            <li>Pinata cake</li>
+            <li>Red velvet cake</li>
+            <li>Chocolate walnut cake</li>
+            <li>Butterscotch cake</li>
+            <li>Dream cake</li>
+            <li>Blueberry cake</li>
+            <li>Vanilla cake</li>
+            <li>Black forest cake</li>
+        </ul>
+        
+        <h3>Cookies</h3>
+        <ul>
+            <li>Badam crunchy cookies</li>
+            <li>Center filled cookies</li>
+            <li>Nankhatai</li>
+            <li>Chocolate chip cookies</li>
+            <li>American shortbread cookies</li>
+            <li>Red velvet cookies</li>
+            <li>Double chocochip cookies</li>
+            <li>Granola bar</li>
+            <li>Chocolate crinkle cookies</li>
+            <li>Thumb cookies</li>
+            <li>Checkers cookies</li>
+        </ul>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <div class="hero-badge">Since 2022 &nbsp;·&nbsp; Ahmedabad</div>
-    <h1 class="hero-title">Shreeji<br/><em>Bapa</em><br/>Bakery</h1>
-    <p class="hero-by">® by Kinjal Shah</p>
-    <p class="hero-tagline">Pure, Fresh and Egg-free Bakery products — crafted with devotion.</p>
-    <p class="hero-jay">✦ Jay Swaminarayan ✦</p>
-    <div class="hero-cta">
-      <a href="#icecream" class="btn-primary">View Ice Cream Menu</a>
-      <a href="#products" class="btn-outline">All Products</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-pattern"></div>
-    <div class="hero-circle-outer">
-      <div class="hero-circle-inner">
-        <span class="hero-ice-icon">🍦</span>
-        <p class="hero-since">Est.</p>
-        <p class="hero-year">2022</p>
-      </div>
-    </div>
-  </div>
-</section>
+		<h3>Muffins</h3>
+        <ul>
+            <li>Apple cinnamon muffins</li>
+			<li>Double chocolate chips muffins</li>
+            <li>Banana oats muffins</li>
+            <li>Blueberry muffins</li>
+            <li>Lemon rasberry struzal muffins</li>
+            <li>Nutella chocolate muffins</li>
+            <li>Coffe volent muffins</li>
+            <li>Carrot picken muffins</li>
+            <li>Fruit and nuts muffins</li>
+            <li>Zucchini and seeds muffins </li>
+            <li>Spinach and corn muffins</li>
+            <li>Parmesan cheese and olives muffins</li>
+        </ul>
+		
+        <h3>Chocolates</h3>
+        <ul>
+            <li>Milk chocolate</li>
+            <li>White chocolate</li>
+            <li>Dark crunchy chocolate</li>
+            <li>Center filling chocolate</li>
+            <li>Dark chocolate</li>
+            <li>Dry fruit chocolate</li>
+        </ul>
+        
+        <h3>Cup Cakes</h3>
+        <ul>
+            <li>Chocolate</li>
+            <li>Vanilla</li>
+            <li>Red Velvet</li>
+            <li>Blueberry</li>
+        </ul>
+        
+        <h3>Brownies</h3>
+        <ul>
+            <li>Chocolate Brownie</li>
+            <li>Chocolate Walnut Brownie</li>
+            <li>Cookie Chocolate Brownie</li>
+        </ul>
 
-<!-- NOTICE BANNER -->
-<div class="notice-banner">
-  <strong>Important:</strong> Place your order <strong>1–2 days in advance</strong> &nbsp;·&nbsp; Call us at <strong>+91 9016679826</strong>
-</div>
-
-<!-- VALUES -->
-<section class="values-section" id="values">
-  <div class="section-header">
-    <span class="section-eyebrow">Our Promise</span>
-    <h2 class="section-title">Made with <em>Faith & Purity</em></h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="values-grid">
-    <div class="value-card">
-      <span class="value-icon">🥚</span>
-      <h3 class="value-title">100% Egg Free</h3>
-      <p class="value-desc">Every product we make is completely egg-free — safe and suitable for vegetarian families.</p>
-    </div>
-    <div class="value-card">
-      <span class="value-icon">🌿</span>
-      <h3 class="value-title">Pure & Natural</h3>
-      <p class="value-desc">Our ice creams contain no CMC & GMS, stabilizers, artificial colours, or synthetic additives of any kind.</p>
-    </div>
-    <div class="value-card">
-      <span class="value-icon">🙏</span>
-      <h3 class="value-title">Divine Guidelines</h3>
-      <p class="value-desc">All bakery products are prepared following the sacred guidelines of The God Swaminarayan.</p>
-    </div>
-  </div>
-</section>
-
-<!-- BAKERY PRODUCTS -->
-<section class="bakery-section" id="products">
-  <div class="section-header">
-    <span class="section-eyebrow">Freshly Baked</span>
-    <h2 class="section-title">Our <em>Bakery</em> Products</h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="products-grid">
-
-    <div class="product-category">
-      <span class="product-cat-icon">🎂</span>
-      <h3 class="product-cat-name">Cakes</h3>
-      <ul class="product-cat-items">
-        <li>Chocolate Cake</li>
-        <li>Mixfruit Cake</li>
-        <li>White Forest Cake</li>
-        <li>Doll Cake</li>
-        <li>Swiss Cake</li>
-        <li>Pineapple Cake</li>
-        <li>Rasmalai Cake</li>
-        <li>Oreo Cake</li>
-        <li>Dark Chocolate Cake</li>
-        <li>Strawberry Cake</li>
-        <li>Gulab Jamun Cake</li>
-        <li>Kit Kat Cake</li>
-        <li>Truffle Cake</li>
-        <li>Casata Cake</li>
-        <li>Pinata Cake</li>
-        <li>Red Velvet Cake</li>
-        <li>Chocolate Walnut Cake</li>
-        <li>Butterscotch Cake</li>
-        <li>Dream Cake</li>
-        <li>Blueberry Cake</li>
-        <li>Vanilla Cake</li>
-        <li>Black Forest Cake</li>
-      </ul>
-    </div>
-
-    <div class="product-category">
-      <span class="product-cat-icon">🍪</span>
-      <h3 class="product-cat-name">Cookies</h3>
-      <ul class="product-cat-items">
-        <li>Badam Crunchy Cookies</li>
-        <li>Center Filled Cookies</li>
-        <li>Nankhatai</li>
-        <li>Chocolate Chip Cookies</li>
-        <li>American Shortbread Cookies</li>
-        <li>Red Velvet Cookies</li>
-        <li>Double Chocochip Cookies</li>
-        <li>Granola Bar</li>
-        <li>Chocolate Crinkle Cookies</li>
-        <li>Thumb Cookies</li>
-        <li>Checkers Cookies</li>
-      </ul>
-    </div>
-
-    <div class="product-category">
-      <span class="product-cat-icon">🧁</span>
-      <h3 class="product-cat-name">Muffins</h3>
-      <ul class="product-cat-items">
-        <li>Apple Cinnamon Muffins</li>
-        <li>Double Chocolate Chips Muffins</li>
-        <li>Banana Oats Muffins</li>
-        <li>Blueberry Muffins</li>
-        <li>Lemon Raspberry Streusel Muffins</li>
-        <li>Nutella Chocolate Muffins</li>
-        <li>Coffee Velvet Muffins</li>
-        <li>Carrot Picken Muffins</li>
-        <li>Fruit and Nuts Muffins</li>
-        <li>Zucchini and Seeds Muffins</li>
-        <li>Spinach and Corn Muffins</li>
-        <li>Parmesan Cheese and Olives Muffins</li>
-      </ul>
-    </div>
-
-    <div class="product-category">
-      <span class="product-cat-icon">🍫</span>
-      <h3 class="product-cat-name">Chocolates</h3>
-      <ul class="product-cat-items">
-        <li>Milk Chocolate</li>
-        <li>White Chocolate</li>
-        <li>Dark Crunchy Chocolate</li>
-        <li>Center Filling Chocolate</li>
-        <li>Dark Chocolate</li>
-        <li>Dry Fruit Chocolate</li>
-      </ul>
-    </div>
-
-    <div class="product-category">
-      <span class="product-cat-icon">🎀</span>
-      <h3 class="product-cat-name">Cup Cakes</h3>
-      <ul class="product-cat-items">
-        <li>Chocolate</li>
-        <li>Vanilla</li>
-        <li>Red Velvet</li>
-        <li>Blueberry</li>
-      </ul>
-    </div>
-
-    <div class="product-category">
-      <span class="product-cat-icon">🍫</span>
-      <h3 class="product-cat-name">Brownies</h3>
-      <ul class="product-cat-items">
-        <li>Chocolate Brownie</li>
-        <li>Chocolate Walnut Brownie</li>
-        <li>Cookie Chocolate Brownie</li>
-      </ul>
-    </div>
-
-    <div class="product-category">
-      <span class="product-cat-icon">🍞</span>
-      <h3 class="product-cat-name">Breads</h3>
-      <ul class="product-cat-items">
-        <li>Puff</li>
-        <li>Bread</li>
-        <li>Pav</li>
-        <li>Bun</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-<!-- ICE CREAM MENU -->
-<section class="icecream-section" id="icecream">
-  <div class="icecream-inner">
-    <div class="section-header">
-      <span class="section-eyebrow">100% Natural · No CMC & GMS · No Artificial Colours</span>
-      <h2 class="section-title">Ice Cream <em>Menu</em></h2>
-      <div class="section-divider"></div>
-      <p class="menu-note">All flavours available in 500 mL and 1 Litre packs</p>
-    </div>
-
-    <div class="menu-tabs">
-      <button class="menu-tab active" onclick="switchTab(this,'classic')">Classic Favourites</button>
-      <button class="menu-tab" onclick="switchTab(this,'nuts')">Nut & Dry Fruit</button>
-      <button class="menu-tab" onclick="switchTab(this,'indian')">Indian Heritage</button>
-      <button class="menu-tab" onclick="switchTab(this,'tropical')">Tropical Fruits</button>
-      <button class="menu-tab" onclick="switchTab(this,'more')">More Fruits</button>
-    </div>
-
-    <!-- Classic -->
-    <div class="menu-section active" id="tab-classic">
-      <div class="menu-item"><span class="menu-item-name">Plain Vanilla</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹150</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹300</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Pan Bahar</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹200</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹400</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Black Forest</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹250</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹500</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Black Currant</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹250</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹500</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Cookie</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹200</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹400</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Jelly Belly</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹250</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹500</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Red & White Velvety</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹250</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹500</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Butter Scotch</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹250</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹500</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Mint Chocochip Chocolate</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹250</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹500</span></div></div></div>
-    </div>
-
-    <!-- Nuts -->
-    <div class="menu-section" id="tab-nuts">
-      <div class="menu-item"><span class="menu-item-name">Badam Anjeer (Almond–Fig)</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Badam Carnival</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Cashew (Kaju) Malai</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Kaju Crunch</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Nutty Hazelnut Crunch</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-    </div>
-
-    <!-- Indian -->
-    <div class="menu-section" id="tab-indian">
-      <div class="menu-item"><span class="menu-item-name">Shrikhand</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Gajar Halwa</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Rasmalai</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Rose Gulkand</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Gulab Jamun</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Rajbhog</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Basundi</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Kesar Pista</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Pani Puri</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Pista Strawberry Delight</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-    </div>
-
-    <!-- Tropical -->
-    <div class="menu-section" id="tab-tropical">
-      <div class="menu-item"><span class="menu-item-name">Mango</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹200</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹400</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Tender Coconut</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹200</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹400</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Custard Apple</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹200</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹400</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Chilly Guava</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹250</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹500</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Fruit Overloaded</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹250</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹500</span></div></div></div>
-    </div>
-
-    <!-- More Fruits -->
-    <div class="menu-section" id="tab-more">
-      <div class="menu-item"><span class="menu-item-name">Tangy Orange</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹200</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹400</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Lemonade</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹250</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹500</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Pinacolada</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹300</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹600</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Chiku</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹200</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹400</span></div></div></div>
-      <div class="menu-item"><span class="menu-item-name">Muskmelon</span><div class="menu-item-prices"><div class="price-row"><span class="price-size">500 mL</span><span class="price-val">₹200</span></div><div class="price-row"><span class="price-size">1 L</span><span class="price-val">₹400</span></div></div></div>
-    </div>
-
-    <!-- Purity Badge -->
-    <div class="natural-badge">
-      <div class="badge-item">
-        <p class="badge-item-label">CMC & GMS</p>
-        <p class="badge-item-value">Free</p>
-      </div>
-      <div class="badge-sep"></div>
-      <div class="badge-item">
-        <p class="badge-item-label">Stabilizers</p>
-        <p class="badge-item-value">Free</p>
-      </div>
-      <div class="badge-sep"></div>
-      <div class="badge-item">
-        <p class="badge-item-label">Artificial Colours</p>
-        <p class="badge-item-value">Free</p>
-      </div>
-      <div class="badge-sep"></div>
-      <div class="badge-item">
-        <p class="badge-item-label">Synthetic Additives</p>
-        <p class="badge-item-value">Free</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- GALLERY SECTION — added, nothing else changed -->
-<!-- ═══════════════════════════════════════════ -->
-<section class="gallery-section" id="gallery">
-  <div class="section-header">
-    <span class="section-eyebrow">A Peek Inside</span>
-    <h2 class="section-title">Our <em>Gallery</em></h2>
-    <div class="section-divider"></div>
-  </div>
-
-  <!-- Video -->
-  <div class="gallery-video-wrap">
-    <video controls preload="none" poster="">
-      <source src="video1.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-  </div>
-
-  <!-- Filter Buttons -->
-  <div class="gallery-filters">
-    <button class="gallery-filter-btn active" onclick="filterGallery(this,'all')">All</button>
-    <button class="gallery-filter-btn" onclick="filterGallery(this,'cake')">Cakes</button>
-    <button class="gallery-filter-btn" onclick="filterGallery(this,'giftbox')">Gift Boxes</button>
-    <button class="gallery-filter-btn" onclick="filterGallery(this,'raksha')">Rakshabandhan</button>
-    <button class="gallery-filter-btn" onclick="filterGallery(this,'cookies')">Cookies</button>
-    <button class="gallery-filter-btn" onclick="filterGallery(this,'breads')">Breads</button>
-    <button class="gallery-filter-btn" onclick="filterGallery(this,'other')">Other</button>
-  </div>
-
-  <!-- Masonry Grid -->
-  <div class="gallery-grid" id="galleryGrid">
-
-    <!-- Cakes 1–25 -->
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(0)">
-      <img src="cake1.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(1)">
-      <img src="cake2.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(2)">
-      <img src="cake3.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(3)">
-      <img src="cake4.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(4)">
-      <img src="cake5.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(5)">
-      <img src="cake6.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(6)">
-      <img src="cake7.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(7)">
-      <img src="cake8.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(8)">
-      <img src="cake9.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(9)">
-      <img src="cake10.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(10)">
-      <img src="cake11.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(11)">
-      <img src="cake12.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(12)">
-      <img src="cake13.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(13)">
-      <img src="cake14.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(14)">
-      <img src="cake15.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(15)">
-      <img src="cake16.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(16)">
-      <img src="cake17.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(17)">
-      <img src="cake18.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(18)">
-      <img src="cake19.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(19)">
-      <img src="cake20.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(20)">
-      <img src="cake21.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(21)">
-      <img src="cake22.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(22)">
-      <img src="cake23.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(23)">
-      <img src="cake24.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cake" onclick="openLightbox(24)">
-      <img src="cake25.jpeg" alt="Cake" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-
-    <!-- Gift Boxes -->
-    <div class="gallery-item" data-cat="giftbox" onclick="openLightbox(25)">
-      <img src="giftbox1.jpeg" alt="Gift Box" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="giftbox" onclick="openLightbox(26)">
-      <img src="giftbox2.jpeg" alt="Gift Box" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="giftbox" onclick="openLightbox(27)">
-      <img src="giftbox3.jpeg" alt="Gift Box" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-
-    <!-- Rakshabandhan -->
-    <div class="gallery-item" data-cat="raksha" onclick="openLightbox(28)">
-      <img src="Rakshabandhan gift boxes1.jpeg" alt="Rakshabandhan Gift Box" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="raksha" onclick="openLightbox(29)">
-      <img src="Rakshabandhan gift boxes2.jpeg" alt="Rakshabandhan Gift Box" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="raksha" onclick="openLightbox(30)">
-      <img src="Rakshabandhan gift boxes3.jpeg" alt="Rakshabandhan Gift Box" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="raksha" onclick="openLightbox(31)">
-      <img src="Rakshabandhan gift box1.jpeg" alt="Rakshabandhan Gift Box" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="raksha" onclick="openLightbox(32)">
-      <img src="Rakshabandhan gift box2.jpeg" alt="Rakshabandhan Gift Box" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="raksha" onclick="openLightbox(33)">
-      <img src="Rakshabandhan gift box3.jpeg" alt="Rakshabandhan Gift Box" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="raksha" onclick="openLightbox(34)">
-      <img src="Rakshabandhan gift box4.jpeg" alt="Rakshabandhan Gift Box" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-
-    <!-- Apple Pie -->
-    <div class="gallery-item" data-cat="other" onclick="openLightbox(35)">
-      <img src="applepie1.jpeg" alt="Apple Pie" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-
-    <!-- Breads -->
-    <div class="gallery-item" data-cat="breads" onclick="openLightbox(36)">
-      <img src="bread1.jpeg" alt="Bread" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="breads" onclick="openLightbox(37)">
-      <img src="pav1.jpeg" alt="Pav" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="breads" onclick="openLightbox(38)">
-      <img src="bun1.jpeg" alt="Bun" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="breads" onclick="openLightbox(39)">
-      <img src="Pav.jpeg" alt="Pav" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-
-    <!-- Cookies -->
-    <div class="gallery-item" data-cat="cookies" onclick="openLightbox(40)">
-      <img src="cookies1.jpeg" alt="Cookies" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cookies" onclick="openLightbox(41)">
-      <img src="cookies2.jpeg" alt="Cookies" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cookies" onclick="openLightbox(42)">
-      <img src="cookies3.jpeg" alt="Cookies" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cookies" onclick="openLightbox(43)">
-      <img src="cookies4.jpeg" alt="Cookies" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="cookies" onclick="openLightbox(44)">
-      <img src="cookies5.jpeg" alt="Cookies" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-
-    <!-- Other -->
-    <div class="gallery-item" data-cat="other" onclick="openLightbox(45)">
-      <img src="macroons1.jpeg" alt="Macaroons" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-    <div class="gallery-item" data-cat="other" onclick="openLightbox(46)">
-      <img src="muffins1.jpeg" alt="Muffins" loading="lazy" />
-      <div class="gallery-item-overlay"><span>⊕</span></div>
-    </div>
-
-  </div><!-- /.gallery-grid -->
-</section>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <button class="lightbox-arrow lightbox-prev" onclick="moveLightbox(-1)">&#8249;</button>
-  <img class="lightbox-img" id="lightboxImg" src="" alt="" />
-  <button class="lightbox-arrow lightbox-next" onclick="moveLightbox(1)">&#8250;</button>
-</div>
-
-<!-- ABOUT -->
-<section class="about-section" id="about">
-  <div class="about-text">
-    <div class="section-header" style="text-align:left;">
-      <span class="section-eyebrow">Our Story</span>
-      <h2 class="section-title">About <em>Us</em></h2>
-      <div class="section-divider" style="margin-left:0;"></div>
-    </div>
-    <div class="about-body">
-      <p>Shreeji Bapa Bakery was founded in 2022 by Kinjal Shah with a simple yet profound mission — to bring pure, fresh, and completely egg-free bakery delights to every home.</p>
-      <p>Every product we create follows the sacred guidelines of The God Swaminarayan, ensuring not just physical purity but also the sanctity of our craft and ingredients.</p>
-      <p>From celebration cakes to natural ice creams, from cookies to handcrafted chocolates — each item is made with love, care, and an unwavering commitment to quality.</p>
-      <p><strong>Owner &amp; Baker:</strong> Kinjal Shah &nbsp;·&nbsp; <strong>Contact:</strong> +91 9016679826</p>
-    </div>
-  </div>
-  <div class="about-callout">
-    <blockquote class="about-quote">
-      "Pure ingredients, divine guidance, and heartfelt dedication — that is the recipe behind every Shreeji Bapa creation."
-    </blockquote>
-    <p class="about-owner">— Kinjal Shah, Founder &amp; Baker</p>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <div class="section-header">
-    <span class="section-eyebrow">Get in Touch</span>
-    <h2 class="section-title">Place Your <em>Order</em></h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="contact-details">
-    <div class="contact-item">
-      <span class="contact-label">Phone / WhatsApp</span>
-      <span class="contact-value"><a href="tel:+919016679826">+91 9016679826</a></span>
-    </div>
-    <div class="contact-item">
-      <span class="contact-label">Website</span>
-      <span class="contact-value"><a href="https://shreejibapabakery.com" target="_blank">shreejibapabakery.com</a></span>
-    </div>
-    <div class="contact-item">
-      <span class="contact-label">Established</span>
-      <span class="contact-value">Since 2022</span>
-    </div>
-  </div>
-  <div class="contact-order-note">
-    Please place your order 1–2 days in advance for all bakery items.
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">Shreeji<span>Bapa</span> Bakery ®</div>
-  <p class="footer-copy">© 2025 Shreeji Bapa Bakery. All rights reserved. &nbsp;·&nbsp; by Kinjal Shah</p>
-  <p class="footer-jay">Jay Swaminarayan</p>
-</footer>
-
-<script>
-  /* ── Ice Cream tab switcher ── */
-  function switchTab(btn, id) {
-    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + id).classList.add('active');
-  }
-
-  /* ── Gallery filter ── */
-  function filterGallery(btn, cat) {
-    document.querySelectorAll('.gallery-filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.gallery-item').forEach(item => {
-      if (cat === 'all' || item.dataset.cat === cat) {
-        item.style.display = '';
-      } else {
-        item.style.display = 'none';
-      }
-    });
-    // rebuild visible index array for lightbox
-    buildVisibleIndex();
-  }
-
-  /* ── Lightbox ── */
-  // All image srcs in DOM order
-  const allImgs = [
-    'cake1.jpeg',
-    'cake2.jpeg',
-    'cake3.jpeg',
-    'cake4.jpeg',
-    'cake5.jpeg',
-    'cake6.jpeg',
-    'cake7.jpeg',
-    'cake8.jpeg',
-    'cake9.jpeg',
-    'cake10.jpeg',
-    'cake11.jpeg',
-    'cake12.jpeg',
-    'cake13.jpeg',
-    'cake14.jpeg',
-    'cake15.jpeg',
-    'cake16.jpeg',
-    'cake17.jpeg',
-    'cake18.jpeg',
-    'cake19.jpeg',
-    'cake20.jpeg',
-    'cake21.jpeg',
-    'cake22.jpeg',
-    'cake23.jpeg',
-    'cake24.jpeg',
-    'cake25.jpeg',
-    'giftbox1.jpeg',
-    'giftbox2.jpeg',
-    'giftbox3.jpeg',
-    'Rakshabandhan gift boxes1.jpeg',
-    'Rakshabandhan gift boxes2.jpeg',
-    'Rakshabandhan gift boxes3.jpeg',
-    'Rakshabandhan gift box1.jpeg',
-    'Rakshabandhan gift box2.jpeg',
-    'Rakshabandhan gift box3.jpeg',
-    'Rakshabandhan gift box4.jpeg',
-    'applepie1.jpeg',
-    'bread1.jpeg',
-    'pav1.jpeg',
-    'bun1.jpeg',
-    'Pav.jpeg',
-    'cookies1.jpeg',
-    'cookies2.jpeg',
-    'cookies3.jpeg',
-    'cookies4.jpeg',
-    'cookies5.jpeg',
-    'macroons1.jpeg',
-    'muffins1.jpeg',
-  ];
-
-  let visibleIndexes = allImgs.map((_, i) => i);
-  let currentVisiblePos = 0;
-
-  function buildVisibleIndex() {
-    const items = document.querySelectorAll('.gallery-item');
-    visibleIndexes = [];
-    items.forEach((item, i) => {
-      if (item.style.display !== 'none') visibleIndexes.push(i);
-    });
-  }
-
-  function openLightbox(idx) {
-    buildVisibleIndex();
-    currentVisiblePos = visibleIndexes.indexOf(idx);
-    if (currentVisiblePos === -1) currentVisiblePos = 0;
-    document.getElementById('lightboxImg').src = allImgs[visibleIndexes[currentVisiblePos]];
-    document.getElementById('lightbox').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function closeLightboxOnBg(e) {
-    if (e.target === document.getElementById('lightbox')) closeLightbox();
-  }
-
-  function moveLightbox(dir) {
-    currentVisiblePos = (currentVisiblePos + dir + visibleIndexes.length) % visibleIndexes.length;
-    document.getElementById('lightboxImg').src = allImgs[visibleIndexes[currentVisiblePos]];
-  }
-
-  document.addEventListener('keydown', e => {
-    if (!document.getElementById('lightbox').classList.contains('open')) return;
-    if (e.key === 'ArrowRight') moveLightbox(1);
-    if (e.key === 'ArrowLeft') moveLightbox(-1);
-    if (e.key === 'Escape') closeLightbox();
-  });
-</script>
-
+	     <h3>Breads</h3>
+        <ul>
+            <li>Puff</li>
+	    <li>Bread</li>
+            <li>Pav</li>
+            <li>Bun</li>
+        </ul>
+        <h2>About Us</h2>
+        <p><strong>Owner cum Baker:</strong> Kinjal Shah</p>
+        <p><strong>Contact:</strong> +91-9016679826</p>
+	
+    </div>
+    
+    <footer>
+        <p>&copy; &reg; Shreeji Bapa Bakery 2025. All rights reserved.</p>
+	<p>Contact: +91 9016679826</p>
+    </footer>
 </body>
+
 </html>
